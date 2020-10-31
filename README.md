@@ -1,13 +1,12 @@
-Built with react-native and expo.
+<div>
+  <p>This is a movie search app that has been built using react-native/expo, firebase, node.js/express.js, and the open movie database. User authentiation is provided by firebase, and the open movie database is connected to the front end react-application through an express.js server. Firebase/Firestore keeps all of the logged in users saved movies in a database so they can add, delete, and update their saved movies at any time.</p>
+  
+  <p> Built using react hooks and functional components</p>
 
-Search favorite movies and save to a list. I am using Firebase/Firestore for user authentication and database, and OMDB API for movie search.
+<p>To clone and use locally you will need to create a firebase project and firebase config file. If you need any help please send me a message :) </p>
 
-To clone and run locally, you will need to configure your own firebaseConfig file as these file as this file has not been commited. You will also need to obtain an OMDB API key. (Both of these are free). App.json file has also not been commited, but when you install expo this file is automatically created.
+<p>Check out the project here:</p>
 
-This App currently runs for web, ios and android.
+<a href = "https://expo.io/@angelena/projects/expo-server"> "https://expo.io/@angelena/projects/expo-server"</a>
 
-Check out the project here:
-
-https://expo.io/@angelena/projects/expo-server
-
-(You can either use the Android emulator in the browser found in the link above, or, if you have the expo-app installed on your mobile device, the project can be viewed from there by scanning the QR code)
+<p>Either scan the QR code (expo-app is required to scan the code, but it's free!) or, click "view in browser", this launches an android emulator. </p>
