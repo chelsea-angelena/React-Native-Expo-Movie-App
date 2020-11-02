@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
+	TouchableOpacity,
 	ScrollView,
 	RefreshControl,
 	View,
@@ -9,83 +10,96 @@ import {
 	FlatList,
 	Platform,
 } from 'react-native';
+import { Image, Card, Divider } from 'react-native-elements';
 import * as db from '../../config/firebaseConfig';
 import SavedItem from './SavedItem';
 import { Dimensions } from 'react-native';
 import Screen from '../screens/Auth/Screen';
 import colors from '../styles/colors';
 import useSaved from '../Context/useSaved';
-
+import { AuthContext } from '../Context/AuthContext';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
 export default function MyList({ route, navigation }) {
-	const [savedMovieList] = useSaved();
-	const [refreshed, setRefreshed] = useState(false);
-	const [refreshing, setRefreshing] = useState(false);
-	const [newMovieList, setNewMovieList] = useState([]);
+	// const [newMovieList, setNewMovieList] = useState([]);
+	const [savedList, setSavedList] = useState([]);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const user = useContext(AuthContext);
+	const userId = user.uid;
+	console.log(userId, 'userId');
 
-	const wait = (timeout) => {
-		return new Promise((resolve) => {
-			setTimeout(resolve, timeout);
-		});
-	};
-
-	const getNewSaved = async () => {
+	const getSaved = async () => {
 		try {
-			let result = await db.getSavedMovies();
-			setNewMovieList(result);
-			setRefreshed(true);
+			let saved = await db.getSavedMovies(userId);
+			setSavedList(saved);
+			setLoading(false);
 		} catch (e) {
-			console.log(e);
+			setError(e);
 		}
 	};
-
-	const onRefresh = React.useCallback(() => {
-		setRefreshing(true);
-		wait(2000).then(() => getNewSaved());
-		setRefreshing(false);
+	const deleteItem = async (item) => {
+		try {
+			await db.deleteMovieItem(item, userId);
+		} catch (e) {
+			setError(e);
+		}
+		getSaved();
+	};
+	useEffect(() => {
+		getSaved();
 	}, []);
 
+	if (!userId) {
+		return <Text>Loading...</Text>;
+	}
+	if (!savedList) {
+		return <Text>Loading..</Text>;
+	}
 	return (
 		<Screen>
-			<ScrollView>
-				<ImageBackground
-					alt='theatre'
-					style={{
-						resizeMode: 'cover',
-						width: '100%',
-						minHeight: windowHeight,
-					}}
-					source={{
-						uri:
-							'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
-					}}
-				>
-					{savedMovieList.length === 0 ? (
-						<Text style={styles.caption}>
-							Find your favorite movie's saved here
-						</Text>
-					) : null}
-					<View style={styles.listView}>
-						<FlatList
-							style={styles.list}
-							showsVerticalScrollIndicator={false}
-							data={!refreshed ? savedMovieList : newMovieList}
-							keyExtractor={(savedMovieList) => savedMovieList.id}
-							renderItem={({ item }) => {
-								return (
+			<ImageBackground
+				alt='theatre'
+				style={{
+					resizeMode: 'cover',
+					width: '100%',
+					minHeight: windowHeight,
+				}}
+				source={{
+					uri:
+						'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+				}}
+			>
+				{savedList.length === 0 ? (
+					<Text style={styles.caption}>
+						Find your favorite movie's saved here
+					</Text>
+				) : null}
+
+				<View style={styles.listView}>
+					<FlatList
+						style={styles.list}
+						showsVerticalScrollIndicator={false}
+						data={savedList}
+						onDeleteItem={deleteItem}
+						keyExtractor={(savedList) => savedList.id}
+						renderItem={({ item }) => {
+							return (
+								<>
 									<SavedItem
 										item={item}
-										onRefresh={onRefresh}
-										refreshControl={<RefreshControl refreshing={refreshing} />}
+										userId={userId}
+										onDeleteItem={deleteItem}
 									/>
-								);
-							}}
-						/>
-					</View>
-				</ImageBackground>
-			</ScrollView>
+
+								</>
+							);
+						}}
+					/>
+				</View>
+			</ImageBackground>
 		</Screen>
 	);
 }
@@ -108,8 +122,9 @@ const styles = StyleSheet.create({
 	},
 	listView: {
 		height: '100%',
+		marginBottom: 64,
 	},
 	list: {
-		paddingBottom: 64,
+		marginBottom: 64,
 	},
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	View,
 	Platform,
@@ -14,7 +14,7 @@ import colors from '../styles/colors';
 import api from '../api/api';
 import Screen from './Auth/Screen';
 
-const windowWidth = Dimensions.get('window').width;
+// const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const SearchScreen = () => {
@@ -32,11 +32,15 @@ const SearchScreen = () => {
 			let response = await api.get(`/api/movies/${searchTerm}`);
 			setMovies(response.data.Search);
 		} catch (e) {
-			setError(e);
+			setError(e.message);
 		} finally {
 			setLoading(false);
 		}
 	};
+
+	useEffect(() => {
+		submitSearch('');
+	}, []);
 
 	return (
 		<Screen>
@@ -67,11 +71,14 @@ const SearchScreen = () => {
 						/>
 					) : (
 						<>
-							<Text style={styles.text}>Welcome to The Movie App!</Text>
-							<Text style={styles.subText}>
-								Search for your favorite films and save your collection
-							</Text>
-						</>
+
+									<Text style={styles.text}>Welcome to The Movie App!</Text>
+									<Text style={styles.subText}>
+										Search for your favorite films and save your collection
+									</Text>
+								</>
+
+
 					)}
 
 					<DataList movies={movies} error={error} loading={loading} />

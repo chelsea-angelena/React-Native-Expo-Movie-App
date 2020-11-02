@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
 	StyleSheet,
 	Dimensions,
@@ -12,6 +12,7 @@ import * as db from '../../config/firebaseConfig';
 import AppText from '../components/Text';
 import colors from '../styles/colors';
 import Screen from '../screens/Auth/Screen';
+import { AuthContext } from '../Context/AuthContext';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -21,6 +22,7 @@ const goodByeText = {
 };
 
 export default function LogOut() {
+	const user = useContext(AuthContext);
 	return (
 		<Screen>
 			<ImageBackground

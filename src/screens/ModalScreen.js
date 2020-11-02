@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../Context/AuthContext';
 import MovieDetails from './MovieDetails';
 import api from '../api/api';
-
+import * as db from '../../config/firebaseConfig.js';
 
 export default function ModalScreen(props, { item, route }) {
 	let movieId = props.route.params.item.imdbID;
@@ -30,12 +30,12 @@ export default function ModalScreen(props, { item, route }) {
 	return (
 		<>
 			<MovieDetails
-				userId={userId}
 				id={movieId}
 				movie={movie}
 				navigation={navigation}
 				movieId={movieId}
 				isVis={isVis}
+				userId={userId}
 			/>
 		</>
 	);

@@ -173,7 +173,7 @@ const SignUpScreen = () => {
 											touched.confirmPassword && errors.confirmPassword
 										}
 									/>
-									{/* <CheckBox
+									<CheckBox
 										style={styles.checkBoxContainer}
 										checkedIcon='check-box'
 										iconType='material'
@@ -182,7 +182,7 @@ const SignUpScreen = () => {
 										checkedTitle='You agreed to our terms and conditions'
 										checked={values.check}
 										onPress={() => setFieldValue('check', !values.check)}
-									/> */}
+									/>
 									<View style={styles.buttonContainer}>
 										<FormButton
 											buttonType='outline'

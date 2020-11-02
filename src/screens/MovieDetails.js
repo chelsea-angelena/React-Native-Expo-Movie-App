@@ -14,12 +14,7 @@ import FormButton from '../screens/Auth/FormButton';
 const windowHeight = Dimensions.get('window').height;
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-export default function MovieDetails({
-	userId,
-	movie,
-	isVis,
-	navigation,
-}) {
+export default function MovieDetails({ userId, movie, isVis, navigation }) {
 	const {
 		Actors,
 		Awards,
@@ -116,10 +111,10 @@ export default function MovieDetails({
 						<FormButton
 							disabled={isVis}
 							buttonType='outline'
-							title='Select'
+							title='Save Movie'
 							onPress={onAddMovie}
 							buttonColor={colors.white}
-							backgroundColor={colors.red}
+							backgroundColor={isVis ? colors.grey : colors.red}
 						/>
 					</Card>
 				</View>

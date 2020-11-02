@@ -1,42 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import { SavedProvider } from './src/Context/SavedContext';
-import * as db from './config/firebaseConfig';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { Alert, Text } from 'react-native';
+import { AuthContext } from './src/Context/AuthContext';
+import { useAuth } from './src/screens/Auth/useAuth';
 import { ThemeProvider } from 'react-native-elements';
 import { useColorScheme } from 'react-native-appearance';
-import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
 import MainNav from './src/navigation/MainNav';
-
-export const AuthContext = React.createContext();
+import SplashScreen from './SplashScreen';
 
 function App() {
-	const [user, setUser] = useState(null);
-
-	useEffect(() => {
-		const unsubscribe = db.checkUserAuth((user) => {
-			if (user) {
-				setUser(user);
-			} else {
-				setUser(false);
-			}
-		});
-		return () => unsubscribe();
-	}, []);
-
-	let [fontsLoaded] = useFonts({
-		'Montserrat-Regular': require('./assets/Montserrat/Montserrat-Regular.ttf'),
-	});
+	const [user, loading] = useAuth();
+	console.log(user, 'user');
+	// let [fontsLoaded] = useFonts({
+	// 	'Montserr	at-Regular': require('./assets/Montserrat/Montserrat-Regular.ttf'),
+	// });
 	let colorScheme = useColorScheme();
 
-	if (!fontsLoaded) {
-		return <AppLoading />;
+	// if (error) {
+	// 	return Alert.alert('error');
+	// }
+	if (loading) {
+		return <Text>Loading..</Text>;
 	}
 
 	return (
 		<AuthContext.Provider value={user}>
 			<ThemeProvider useDark={colorScheme === 'dark'}>
 				{/* <SavedProvider> */}
-				<MainNav user={user} />
+				{/* <Recaptcha /> */}
+				<MainNav />
+
+				{/* <CurrentUser /> */}
 				{/* </SavedProvider> */}
 			</ThemeProvider>
 		</AuthContext.Provider>

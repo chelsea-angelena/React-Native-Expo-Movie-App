@@ -58,8 +58,20 @@ export const signInWithGoogle = async () => {
 // 	}
 // };
 
-export const loginWithEmail = (email, password) => {
-	return auth.signInWithEmailAndPassword(email, password);
+export const signIn = (email, password) => {
+	return auth.signInWithEmailAndPassword(email, password).then((response) => {
+		const uid = response.user.uid;
+		db.collection('users')
+			.doc(uid)
+			.get()
+			.then((firestoreDocument) => {
+				if (!firestoreDocument.exists) {
+					alert('User does not exist anymore.');
+					return;
+				}
+				const user = firestoreDocument.data();
+			});
+	});
 };
 
 export const signupWithEmail = (email, password) => {
@@ -113,10 +125,11 @@ export const saveMovie = async (imdbID, movie, userId) => {
 			authorID: userId,
 		});
 };
-
-export const getSavedMovies = async () => {
+export const getUser = () => {
 	let user = firebase.auth().currentUser;
-	let userId = user.uid;
+	return user;
+};
+export const getSavedMovies = async (userId) => {
 	let snapshot = await db
 		.collection('users')
 		.doc(userId)
@@ -126,9 +139,8 @@ export const getSavedMovies = async () => {
 	return data;
 };
 
-export const deleteMovieItem = (id) => {
-	let user = firebase.auth().currentUser;
-	let userId = user.uid;
+export const deleteMovieItem = (item, userId) => {
+	let { id } = item;
 	return db
 		.collection('users')
 		.doc(userId)

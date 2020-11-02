@@ -11,22 +11,20 @@ import {
 import * as db from '../../config/firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import colors from '../styles/colors';
 import useSaved from '../Context/useSaved';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const innerWidth = 0.5 * windowWidth;
 
-const SavedItem = ({ item, onRefresh }) => {
+const SavedItem = ({
+	item,
+	userId,
+	onDeleteItem,
+	// onDeletePress,
+}) => {
 	const { id, Poster, Title } = item;
 	const navigation = useNavigation();
-	const [savedMovieList] = useSaved();
-	const [refreshedList, setRefreshedList] = useState([]);
-
-	const onDeletePress = async () => {
-		await db.deleteMovieItem(id);
-		onRefresh();
-	};
-
 	return (
 		<View style={styles.view}>
 			<Card style={styles.card}>
@@ -37,18 +35,33 @@ const SavedItem = ({ item, onRefresh }) => {
 					<Card.Divider />
 					<Card.Image source={{ uri: Poster }} alt='' style={styles.image} />
 				</TouchableOpacity>
+				<View style={styles.row}>
+					<TouchableOpacity
+						onPress={() => onDeleteItem(item)}
+						style={{ alignSelf: 'flex-end' }}
+					>
+						<MaterialCommunityIcons
+							name='trash-can-outline'
+							style={{ paddingTop: 12, marginRight: 12 }}
+							size={24}
+							color='black'
+						/>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						onPress={() => navigation.navigate('Modal', { item })}
+						style={{ alignSelf: 'flex-end' }}
+					>
+						<MaterialCommunityIcons
+							name='chevron-right'
+							style={{ paddingTop: 12, marginRight: 12 }}
+							size={24}
+							color='black'
+						/>
+					</TouchableOpacity>
+				</View>
+				<Card.Divider style={{ backgroundColor: 'white' }} />
 			</Card>
-			<TouchableOpacity
-				onPress={onDeletePress}
-				style={{ alignSelf: 'flex-end' }}
-			>
-				<MaterialCommunityIcons
-					name='trash-can-outline'
-					style={{ paddingTop: 12, marginRight: 12 }}
-					size={24}
-					color='white'
-				/>
-			</TouchableOpacity>
 		</View>
 	);
 };
@@ -56,23 +69,41 @@ const SavedItem = ({ item, onRefresh }) => {
 const styles = StyleSheet.create({
 	view: {
 		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: 'rgba(0, 0, 0, 0.7)',
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		alignSelf: 'center',
-		marginTop: 24,
+		textAlign: 'center',
+		marginBottom: 88,
+	},
+	row: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	card: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center',
+		textAlign: 'center',
+
 		borderColor: 'white',
 		borderWidth: 0.5,
 		borderStyle: 'solid',
-		padding: 16,
-		textAlign: 'center',
 		borderRadius: 4,
-		marginBottom: 20,
-		overflow: 'hidden',
+
+		paddingRight: 16,
+		paddingLeft: 16,
 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		maxWidth: 500,
-		minWidth: 320,
+		minWidth: 280,
+		// height: 300,
 	},
-
+	title: {
+		color: colors.onyx,
+		fontSize: 18,
+		alignSelf: 'center',
+		fontWeight: 'bold',
+		paddingBottom: 16,
+		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
+	},
 	text: {
 		color: 'white',
 		fontSize: 18,
@@ -82,8 +113,9 @@ const styles = StyleSheet.create({
 		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
 	},
 	image: {
+		maxWidth: 500,
 		minWidth: 280,
-		height: 400,
+		height: 200,
 	},
 });
 

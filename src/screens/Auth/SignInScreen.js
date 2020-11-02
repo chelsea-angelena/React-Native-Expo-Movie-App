@@ -19,7 +19,7 @@ import FormButton from './FormButton';
 import ErrorMessage from './ErrorMessage';
 import * as db from '../../../config/firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
-import { AuthContext } from '../../../App';
+import { AuthContext } from '../../Context/AuthContext';
 import colors from '../../styles/colors';
 import Screen from './Screen';
 
@@ -39,6 +39,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignInScreen = () => {
+	// const [user, setUser] = useState(null);
 	const user = useContext(AuthContext);
 	const [error, setError] = useState(null);
 	const navigation = useNavigation();
@@ -47,7 +48,8 @@ const SignInScreen = () => {
 	const handleLogin = async (values) => {
 		const { email, password } = values;
 		try {
-			await db.loginWithEmail(email, password);
+			await db.signIn(email, password);
+			// setUser(response);
 		} catch (e) {
 			setError(e);
 		}
