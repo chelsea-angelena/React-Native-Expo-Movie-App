@@ -17,12 +17,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const innerWidth = 0.5 * windowWidth;
 
-const SavedItem = ({
-	item,
-	userId,
-	onDeleteItem,
-	// onDeletePress,
-}) => {
+const SavedItem = ({ item, userId, onDeleteItem }) => {
 	const { id, Poster, Title } = item;
 	const navigation = useNavigation();
 	return (
@@ -44,7 +39,7 @@ const SavedItem = ({
 							name='trash-can-outline'
 							style={{ paddingTop: 12, marginRight: 12 }}
 							size={24}
-							color='white'
+							color='black'
 						/>
 					</TouchableOpacity>
 

@@ -20,6 +20,7 @@ export default function MovieDetails({
 	isSaved,
 	navigation,
 	getMovie,
+	setIsSaved,
 }) {
 	const {
 		Actors,
@@ -44,6 +45,7 @@ export default function MovieDetails({
 
 	const onAddMovie = async () => {
 		await db.saveMovie(imdbID, movie, userId);
+		setIsSaved(true);
 		navigation.navigate('MyList');
 	};
 	if (!movie.Title) {
@@ -129,7 +131,7 @@ export default function MovieDetails({
 							<FormButton
 								buttonType='outline'
 								title='Already Saved'
-								onPress={null}
+								disabled
 								buttonColor={colors.white}
 								backgroundColor={colors.grey}
 							/>

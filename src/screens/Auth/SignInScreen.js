@@ -39,7 +39,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignInScreen = () => {
-	// const [user, setUser] = useState(null);
 	const user = useContext(AuthContext);
 	const [error, setError] = useState(null);
 	const navigation = useNavigation();
@@ -77,6 +76,7 @@ const SignInScreen = () => {
 					marginTop: 64,
 				}}
 			/>
+
 			<Screen>
 				<KeyboardAwareScrollView>
 					<Formik

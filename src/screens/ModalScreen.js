@@ -14,7 +14,7 @@ export default function ModalScreen(props) {
 	console.log(savedList, 'savedList');
 	const [isSaved, setIsSaved] = useState(false);
 	console.log(isSaved, 'isSaved');
-	// let isVis = props.route.params.isSaved;
+
 	const user = useContext(AuthContext);
 	const userId = user.uid;
 	const [error, setError] = useState(null);
@@ -29,14 +29,6 @@ export default function ModalScreen(props) {
 			setError(e);
 		}
 	};
-
-	// const checkSaved = async () => {
-	// 	await getSaved();
-	// 	let saved = savedList.map((movie) => {
-	// 		return movie.id === movieId;
-	// 	});
-	// 	console.log(saved, 'saved');
-	// };
 
 	const getSaved = async () => {
 		try {
@@ -58,15 +50,6 @@ export default function ModalScreen(props) {
 		getSaved();
 	}, []);
 
-	// const onAddMovie = async () => {
-	// 	try {
-	// 		await db.saveMovie(imdbID, movie, userId);
-	// 		setIsSaved(true);
-	// 	} catch (e) {
-	// 		setError(e);
-	// 	}
-	// 	getMovie();
-	// };
 	if (!movieId) {
 		return <Text>Loading</Text>;
 	}
@@ -80,6 +63,7 @@ export default function ModalScreen(props) {
 				isSaved={isSaved}
 				userId={userId}
 				getMovie={() => getMovie()}
+				setIsSaved={setIsSaved}
 			/>
 		</>
 	);
