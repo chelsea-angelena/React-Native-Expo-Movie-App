@@ -12,18 +12,16 @@ import * as db from '../../config/firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../styles/colors';
-import useSaved from '../Context/useSaved';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const innerWidth = 0.5 * windowWidth;
 
 const SavedItem = ({ item, imdbId, userId, onDeleteItem }) => {
 	const { id, Poster, Title } = item;
-	// let imdbId = id;
+
 	const navigation = useNavigation();
-	if (!imdbId) {
-		return <Text>Loading...</Text>;
-	}
+
 	return (
 		<View style={styles.view}>
 			<Card style={styles.card}>

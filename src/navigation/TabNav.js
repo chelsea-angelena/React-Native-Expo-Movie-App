@@ -34,17 +34,7 @@ export default function TabNav() {
 					),
 				}}
 			/>
-			{/* <Tab.Screen
-				name='My List'
-				component={MyList}
-				options={{
-					tabBarLabel: 'My List',
-					headerShown: false,
-					tabBarIcon: ({ color }) => (
-						<MaterialCommunityIcons name='heart' color='white' size={26} />
-					),
-				}}
-			/> */}
+
 			<Tab.Screen
 				name='MyList'
 				component={ListStack}

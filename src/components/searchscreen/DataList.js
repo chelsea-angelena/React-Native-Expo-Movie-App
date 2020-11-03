@@ -5,6 +5,7 @@ import {
 	View,
 	Text,
 	FlatList,
+	ActivityIndicator,
 } from 'react-native';
 import ListItem from './ListItem';
 import { useNavigation } from '@react-navigation/native';
@@ -13,8 +14,8 @@ import Screen from '../../screens/Auth/Screen';
 const DataList = ({ movies, loading, error }) => {
 	const navigation = useNavigation();
 
-	if (loading || !movies) {
-		return <Text>Loading...</Text>;
+	if (loading) {
+		return <ActivityIndicator size='large' color='white' />;
 	}
 	if (error) {
 		return <Text> Error...</Text>;

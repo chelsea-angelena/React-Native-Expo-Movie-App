@@ -14,19 +14,17 @@ export default function ListStack() {
 			initialRouteName='MyListScreen'
 			screeenOptions={{
 				headerShown: false,
-				headerTintColor: 'white',
-				headerStyle: { backgroundColor: 'black' },
 			}}
 		>
 			<Stack.Screen
 				component={MyList}
 				name='MyListScreen'
-				options={{ title: 'Saved Movies' }}
+				options={{ title: 'Saved Movies', headerShown: false }}
 			/>
 			<Stack.Screen
 				component={SavedModal}
 				name='SavedModal'
-				options={{ title: 'Movie Details' }}
+				options={{ title: 'Movie Details', headerShown: false }}
 			/>
 		</Stack.Navigator>
 	);

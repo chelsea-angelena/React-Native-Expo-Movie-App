@@ -48,7 +48,6 @@ const SignInScreen = () => {
 		const { email, password } = values;
 		try {
 			await db.signIn(email, password);
-			// setUser(response);
 		} catch (e) {
 			setError(e);
 		}

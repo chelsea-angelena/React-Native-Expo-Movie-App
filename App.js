@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Alert, Text } from 'react-native';
+import { Alert, Text, ActivityIndicator } from 'react-native';
 import { AuthContext } from './src/Context/AuthContext';
 import { useAuth } from './src/screens/Auth/useAuth';
 import { ThemeProvider } from 'react-native-elements';
@@ -15,7 +15,7 @@ function App() {
 	let colorScheme = useColorScheme();
 
 	if (loading) {
-		return <Text>Loading..</Text>;
+		return <ActivityIndicator size='large' color='white' />;
 	}
 
 	return (

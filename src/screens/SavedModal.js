@@ -5,17 +5,18 @@ import MovieDetails from './MovieDetails';
 import api from '../api/api';
 import * as db from '../../config/firebaseConfig.js';
 import useSaved from '../Context/useSaved';
-import { Text } from 'react-native';
+import {
+	ImageBackground,
+	ScrollView,
+	Text,
+	ActivityIndicator,
+} from 'react-native';
 
 export default function SavedModal(props, { route, params }) {
 	let movieId = props.route.params.imdbId;
-	console.log(movieId, 'movieId');
 	const [movie, setMovie] = useState({});
 	const [savedList, setSavedList] = useState([]);
-	console.log(savedList, 'savedList');
 	const [isSaved, setIsSaved] = useState(false);
-	console.log(isSaved, 'isSaved');
-
 	const user = useContext(AuthContext);
 	const userId = user.uid;
 	const [error, setError] = useState(null);
@@ -36,7 +37,7 @@ export default function SavedModal(props, { route, params }) {
 			let saved = await db
 				.getSavedMovies(userId)
 				.then((saved) => saved.filter((movie) => movie.id === movieId));
-			console.log(saved), 'saved';
+
 			setSavedList(saved);
 			if (saved.length >= 1) {
 				setIsSaved(true);
@@ -52,20 +53,30 @@ export default function SavedModal(props, { route, params }) {
 	}, []);
 
 	if (!movieId) {
-		return <Text>Loading</Text>;
+		return <ActivityIndicator size='large' color='white' />;
 	}
+
 	return (
-		<>
-			<MovieDetails
-				imdbID={movieId}
-				movie={movie}
-				navigation={navigation}
-				movieId={movieId}
-				isSaved={isSaved}
-				userId={userId}
-				getMovie={() => getMovie()}
-				setIsSaved={setIsSaved}
-			/>
-		</>
+		<ScrollView style={{ height: '100%' }}>
+			<ImageBackground
+				alt='theatre'
+				style={{ resizeMode: 'cover', height: '100%' }}
+				source={{
+					uri:
+						'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+				}}
+			>
+				<MovieDetails
+					imdbID={movieId}
+					movie={movie}
+					navigation={navigation}
+					movieId={movieId}
+					isSaved={isSaved}
+					userId={userId}
+					getMovie={() => getMovie()}
+					setIsSaved={setIsSaved}
+				/>
+			</ImageBackground>
+		</ScrollView>
 	);
 }

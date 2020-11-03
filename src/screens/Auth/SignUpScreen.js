@@ -23,7 +23,6 @@ import Screen from './Screen';
 import colors from '../../styles/colors';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
 const innerWidth = 0.95 * windowWidth;
 const validationSchema = Yup.object().shape({
 	displayName: Yup.string()

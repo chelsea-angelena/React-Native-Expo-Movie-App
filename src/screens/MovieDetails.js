@@ -1,10 +1,12 @@
 import React from 'react';
 import {
+	ActivityIndicator,
 	ImageBackground,
 	StyleSheet,
 	View,
 	Text,
 	ScrollView,
+	Platform,
 } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Dimensions } from 'react-native';
@@ -49,98 +51,85 @@ export default function MovieDetails({
 		navigation.navigate('MyList');
 	};
 	if (!movie.Title) {
-		return null;
+		return <ActivityIndicator color='white' size='large' />;
 	}
 
 	return (
-		<ImageBackground
-			alt='theatre'
-			style={{ resizeMode: 'cover', height: windowHeight }}
-			source={{
-				uri:
-					'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
-			}}
-		>
-			<ScrollView>
-				<View style={styles.innerView}>
-					<Card
-						wrapperStyle={{ color: colors.white }}
-						containerStyle={{
-							backgroundColor: colors.grey,
-							marginTop: 40,
-							marginBottom: 64,
-						}}
-					>
-						<Card.Image
-							source={{ uri: Poster }}
-							alt=''
-							resizeMode='cover'
-							style={styles.image}
-						/>
-						<Text style={styles.title}>{Title}</Text>
-						<Card.Divider />
-						<View style={styles.container}>
-							<Text style={styles.boldText}>Year: </Text>
-							<Text style={styles.h4}>{Year}</Text>
-							<Text style={styles.boldText}>Actors: </Text>
-							<Text style={styles.h4}>{Actors}</Text>
-							<Text style={styles.boldText}>Awards: </Text>
-							<Text style={styles.h4}>{Awards}</Text>
-							<Text style={styles.boldText}>Country: </Text>
-							<Text style={styles.h4}>Country</Text>
-							<Text style={styles.boldText}>Language: </Text>
-							<Text style={styles.h4}>{Language}</Text>
-							<Text style={styles.boldText}>Metascore: </Text>
-							<Text style={styles.h4}>{Metascore}</Text>
-							<Text style={styles.boldText}>Production: </Text>
-							<Text style={styles.h4}>{Production}</Text>
-							<Text style={styles.boldText}>Released: </Text>
-							<Text style={styles.h4}>{Released}</Text>
-							<Text style={styles.boldText}>Runtime: </Text>
-							<Text style={styles.h4}>{Runtime}</Text>
-							<Text style={styles.boldText}>Title: </Text>
-							<Text style={styles.h4}>{Title}</Text>
-							<Text style={styles.boldText}>Writers: </Text>
-							<Text style={styles.h4}>{Writer}</Text>
-							<Text style={styles.boldText}>Year: </Text>
-							<Text style={styles.h4}>{Year}</Text>
-							<Text style={styles.boldText}>imdb Rating: </Text>
-							<Text style={styles.h4}>{imdbRating}</Text>
-							<Text style={styles.boldText}>Director: </Text>
-							<Text style={styles.h4}>{Director}</Text>
-							<Text style={styles.boldText}>Genre: </Text>
-							<Text style={styles.h4}>{Genre}</Text>
-							<Text style={styles.boldText}>Plot: </Text>
-							<Text style={styles.h4}>{Plot}</Text>
-							<Text style={styles.boldText}>Rated: </Text>
-							<Text style={styles.h4}>{Rated}</Text>
-							{Website === true ? (
-								<Text style={styles.h4}>{Website}</Text>
-							) : null}
-							<Text style={styles.boldText}>Plot: </Text>
-							<Text style={styles.h4}>imdb rating: {imdbRating}</Text>
-						</View>
-						{!isSaved ? (
-							<FormButton
-								buttonType='outline'
-								title='Save Movie'
-								onPress={() => onAddMovie()}
-								buttonColor={colors.white}
-								backgroundColor={colors.red}
-							/>
-						) : (
-							<FormButton
-								buttonType='outline'
-								title='Already Saved'
-								disabled
-								buttonColor={colors.white}
-								backgroundColor={colors.grey}
-							/>
-						)}
-					</Card>
+		<View style={styles.innerView}>
+			<Card
+				wrapperStyle={{ color: colors.white }}
+				containerStyle={{
+					backgroundColor: colors.grey,
+					marginTop: 40,
+					marginBottom: 64,
+				}}
+			>
+				<Card.Image
+					source={{ uri: Poster }}
+					alt=''
+					resizeMode='cover'
+					style={styles.image}
+				/>
+				<Text style={styles.title}>{Title}</Text>
+				<Card.Divider />
+				<View style={styles.container}>
+					<Text style={styles.boldText}>Year: </Text>
+					<Text style={styles.h4}>{Year}</Text>
+					<Text style={styles.boldText}>Actors: </Text>
+					<Text style={styles.h4}>{Actors}</Text>
+					<Text style={styles.boldText}>Awards: </Text>
+					<Text style={styles.h4}>{Awards}</Text>
+					<Text style={styles.boldText}>Country: </Text>
+					<Text style={styles.h4}>Country</Text>
+					<Text style={styles.boldText}>Language: </Text>
+					<Text style={styles.h4}>{Language}</Text>
+					<Text style={styles.boldText}>Metascore: </Text>
+					<Text style={styles.h4}>{Metascore}</Text>
+					<Text style={styles.boldText}>Production: </Text>
+					<Text style={styles.h4}>{Production}</Text>
+					<Text style={styles.boldText}>Released: </Text>
+					<Text style={styles.h4}>{Released}</Text>
+					<Text style={styles.boldText}>Runtime: </Text>
+					<Text style={styles.h4}>{Runtime}</Text>
+					<Text style={styles.boldText}>Title: </Text>
+					<Text style={styles.h4}>{Title}</Text>
+					<Text style={styles.boldText}>Writers: </Text>
+					<Text style={styles.h4}>{Writer}</Text>
+					<Text style={styles.boldText}>Year: </Text>
+					<Text style={styles.h4}>{Year}</Text>
+					<Text style={styles.boldText}>imdb Rating: </Text>
+					<Text style={styles.h4}>{imdbRating}</Text>
+					<Text style={styles.boldText}>Director: </Text>
+					<Text style={styles.h4}>{Director}</Text>
+					<Text style={styles.boldText}>Genre: </Text>
+					<Text style={styles.h4}>{Genre}</Text>
+					<Text style={styles.boldText}>Plot: </Text>
+					<Text style={styles.h4}>{Plot}</Text>
+					<Text style={styles.boldText}>Rated: </Text>
+					<Text style={styles.h4}>{Rated}</Text>
+					{Website === true ? <Text style={styles.h4}>{Website}</Text> : null}
+					<Text style={styles.boldText}>Plot: </Text>
+					<Text style={styles.h4}>imdb rating: {imdbRating}</Text>
 				</View>
-			</ScrollView>
-		</ImageBackground>
+				{!isSaved ? (
+					<FormButton
+						buttonType='outline'
+						title='Save Movie'
+						onPress={() => onAddMovie()}
+						buttonColor={colors.white}
+						backgroundColor={colors.red}
+					/>
+				) : (
+					<FormButton
+						buttonType='outline'
+						title='Already Saved'
+						disabled
+						buttonColor={colors.white}
+						backgroundColor={colors.grey}
+					/>
+				)}
+			</Card>
+		</View>
 	);
 }
 
@@ -189,6 +178,8 @@ const styles = StyleSheet.create({
 		minWidth: 320,
 		width: '100%',
 		alignSelf: 'center',
+		marginBottom: 64,
+		marginTop: 64,
 	},
 	title: {
 		alignSelf: 'center',

@@ -8,6 +8,7 @@ import {
 	Text,
 	StyleSheet,
 	FlatList,
+	ActivityIndicator,
 	Platform,
 } from 'react-native';
 import { Image, Card, Divider } from 'react-native-elements';
@@ -16,9 +17,7 @@ import SavedItem from './SavedItem';
 import { Dimensions } from 'react-native';
 import Screen from './Auth/Screen';
 import colors from '../styles/colors';
-import useSaved from '../Context/useSaved';
 import { AuthContext } from '../Context/AuthContext';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -29,7 +28,6 @@ export default function MyList({ route, navigation }) {
 	const [loading, setLoading] = useState(true);
 	const user = useContext(AuthContext);
 	const userId = user.uid;
-	console.log(userId, 'userId');
 
 	const getSaved = async () => {
 		try {
@@ -53,10 +51,10 @@ export default function MyList({ route, navigation }) {
 	}, []);
 
 	if (!userId) {
-		return <Text>Loading...</Text>;
+		return <ActivityIndicator />;
 	}
 	if (!savedList) {
-		return <Text>Loading..</Text>;
+		return <ActivityIndicator />;
 	}
 	return (
 		<Screen>

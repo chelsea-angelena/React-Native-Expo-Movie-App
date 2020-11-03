@@ -4,6 +4,7 @@ import {
 	Dimensions,
 	StyleSheet,
 	Platform,
+	ActivityIndicator,
 } from 'react-native';
 import { Card } from 'react-native-elements';
 import colors from '../../styles/colors';
@@ -15,6 +16,7 @@ const innerWidth = 0.85 * windowWidth;
 const ListItem = ({ navigation, title, year, imageUri, id, item }) => {
 	const [savedList] = useSaved();
 	const [isSaved, setIsSaved] = useState(false);
+	const [loading, setloading] = useState(true);
 	let imdbId = id;
 
 	const checkSaved = () => {
