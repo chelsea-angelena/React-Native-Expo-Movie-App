@@ -44,6 +44,10 @@ const SignInScreen = () => {
 	const navigation = useNavigation();
 	const goToSignup = () => navigation.navigate('SignUpScreen');
 
+	const GoogleSignIn = async () => {
+		await db.Goologin();
+	};
+
 	const handleLogin = async (values) => {
 		const { email, password } = values;
 		try {
@@ -135,7 +139,13 @@ const SignInScreen = () => {
 							</View>
 						)}
 					</Formik>
-
+					<View>
+						<Button
+							style={{ backgroundColor: '#4285F4', marginTop: 20 }}
+							onPress={GoogleSignIn}
+							title='Login with Google'
+						/>
+					</View>
 					{error ? Alert.alert('Please try Sign In again, or, Sign Up') : null}
 					<Button
 						title="Don't have an account? Sign Up"

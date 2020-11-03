@@ -4,7 +4,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import Constants from 'expo-constants';
 import firebaseConfigDEV from '../firebaseInit';
-
+import * as Google from 'expo-google-app-auth';
 // const initFirebase = () => {
 // 	let releaseChannel = Constants.manifest.version;
 // 	if (process.env.NODE_ENV !== 'development') {
@@ -30,6 +30,33 @@ export const signInWithGoogle = async () => {
 	await auth.signInWithPopup(provider);
 	window.location.reload();
 };
+
+
+export const Goologin = async () => {
+	try {
+		//await GoogleSignIn.askForPlayServicesAsync();
+		const result = await Google.logInAsync({
+			iosClientId: Constants.manifest.extra.iosClientId,
+			androidClientId: Constants.manifest.extra.androidClientId,
+		});
+		if (result.type === 'success') {
+			console.log(result);
+
+			const credential = firebase.auth.GoogleAuthProvider.credential(
+				result.idToken,
+				result.accessToken
+			);
+			auth.signInWithCredential(credential).catch((error) => {
+				console.log(error);
+			});
+		} else {
+			alert('login: Error:' + message);
+		}
+	} catch ({ message }) {
+		alert('login: Error:' + message);
+	}
+};
+
 // export const signInWithGoogle = async () => {
 // 	try {
 // 		const result = await Expo.Google.signIn({
