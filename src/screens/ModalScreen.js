@@ -4,38 +4,82 @@ import { AuthContext } from '../Context/AuthContext';
 import MovieDetails from './MovieDetails';
 import api from '../api/api';
 import * as db from '../../config/firebaseConfig.js';
+import useSaved from '../Context/useSaved';
 
-export default function ModalScreen(props, { item, route }) {
+export default function ModalScreen(props) {
 	let movieId = props.route.params.item.imdbID;
-	let isVis = props.route.params.isSaved;
+	console.log(movieId, 'movieId');
+	const [movie, setMovie] = useState({});
+	const [savedList, setSavedList] = useState([]);
+	console.log(savedList, 'savedList');
+	const [isSaved, setIsSaved] = useState(false);
+	console.log(isSaved, 'isSaved');
+	// let isVis = props.route.params.isSaved;
 	const user = useContext(AuthContext);
 	const userId = user.uid;
-	const [movie, setMovie] = useState({});
 	const [error, setError] = useState(null);
 
 	const navigation = useNavigation();
 
-	useEffect(() => {
-		const getMovie = async () => {
-			try {
-				let result = await api.get(`/api/${movieId}`);
-				setMovie(result.data);
-			} catch (e) {
-				setError(e);
+	const getMovie = async () => {
+		try {
+			let result = await api.get(`/api/${movieId}`);
+			setMovie(result.data);
+		} catch (e) {
+			setError(e);
+		}
+	};
+
+	// const checkSaved = async () => {
+	// 	await getSaved();
+	// 	let saved = savedList.map((movie) => {
+	// 		return movie.id === movieId;
+	// 	});
+	// 	console.log(saved, 'saved');
+	// };
+
+	const getSaved = async () => {
+		try {
+			let saved = await db
+				.getSavedMovies(userId)
+				.then((saved) => saved.filter((movie) => movie.id === movieId));
+			console.log(saved), 'saved';
+			setSavedList(saved);
+			if (saved.length >= 1) {
+				setIsSaved(true);
 			}
-		};
+		} catch (e) {
+			setError(e);
+		}
 		getMovie();
+	};
+
+	useEffect(() => {
+		getSaved();
 	}, []);
 
+	// const onAddMovie = async () => {
+	// 	try {
+	// 		await db.saveMovie(imdbID, movie, userId);
+	// 		setIsSaved(true);
+	// 	} catch (e) {
+	// 		setError(e);
+	// 	}
+	// 	getMovie();
+	// };
+	if (!movieId) {
+		return <Text>Loading</Text>;
+	}
 	return (
 		<>
 			<MovieDetails
-				id={movieId}
+				imdbID={movieId}
 				movie={movie}
 				navigation={navigation}
 				movieId={movieId}
-				isVis={isVis}
+				isSaved={isSaved}
 				userId={userId}
+				getMovie={() => getMovie()}
 			/>
 		</>
 	);

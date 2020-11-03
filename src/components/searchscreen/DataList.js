@@ -15,13 +15,15 @@ const windowHeight = Dimensions.get('window').height;
 
 const DataList = ({ movies, loading, error }) => {
 	const navigation = useNavigation();
-	
+
 	if (loading || !movies) {
 		return <Text>Loading...</Text>;
 	}
 	if (error) {
 		return <Text> Error...</Text>;
 	}
+
+	
 	return (
 		<Screen>
 			<View style={styles.listView}>

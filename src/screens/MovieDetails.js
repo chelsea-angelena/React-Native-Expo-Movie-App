@@ -14,7 +14,13 @@ import FormButton from '../screens/Auth/FormButton';
 const windowHeight = Dimensions.get('window').height;
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-export default function MovieDetails({ userId, movie, isVis, navigation }) {
+export default function MovieDetails({
+	userId,
+	movie,
+	isSaved,
+	navigation,
+	getMovie,
+}) {
 	const {
 		Actors,
 		Awards,
@@ -40,6 +46,9 @@ export default function MovieDetails({ userId, movie, isVis, navigation }) {
 		await db.saveMovie(imdbID, movie, userId);
 		navigation.navigate('MyList');
 	};
+	if (!movie.Title) {
+		return null;
+	}
 
 	return (
 		<ImageBackground
@@ -108,14 +117,23 @@ export default function MovieDetails({ userId, movie, isVis, navigation }) {
 							<Text style={styles.boldText}>Plot: </Text>
 							<Text style={styles.h4}>imdb rating: {imdbRating}</Text>
 						</View>
-						<FormButton
-							disabled={isVis}
-							buttonType='outline'
-							title='Save Movie'
-							onPress={onAddMovie}
-							buttonColor={colors.white}
-							backgroundColor={isVis ? colors.grey : colors.red}
-						/>
+						{!isSaved ? (
+							<FormButton
+								buttonType='outline'
+								title='Save Movie'
+								onPress={() => onAddMovie()}
+								buttonColor={colors.white}
+								backgroundColor={colors.red}
+							/>
+						) : (
+							<FormButton
+								buttonType='outline'
+								title='Already Saved'
+								onPress={null}
+								buttonColor={colors.white}
+								backgroundColor={colors.grey}
+							/>
+						)}
 					</Card>
 				</View>
 			</ScrollView>

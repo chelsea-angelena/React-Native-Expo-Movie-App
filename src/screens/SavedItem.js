@@ -44,7 +44,7 @@ const SavedItem = ({
 							name='trash-can-outline'
 							style={{ paddingTop: 12, marginRight: 12 }}
 							size={24}
-							color='black'
+							color='white'
 						/>
 					</TouchableOpacity>
 

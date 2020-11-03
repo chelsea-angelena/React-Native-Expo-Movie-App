@@ -93,7 +93,6 @@ export default function MyList({ route, navigation }) {
 										userId={userId}
 										onDeleteItem={deleteItem}
 									/>
-
 								</>
 							);
 						}}
