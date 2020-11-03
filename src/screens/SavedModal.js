@@ -7,7 +7,7 @@ import * as db from '../../config/firebaseConfig.js';
 import useSaved from '../Context/useSaved';
 import { Text } from 'react-native';
 
-export default function ModalScreen(props, { route, params }) {
+export default function SavedModal(props, { route, params }) {
 	let movieId = props.route.params.imdbId;
 	console.log(movieId, 'movieId');
 	const [movie, setMovie] = useState({});

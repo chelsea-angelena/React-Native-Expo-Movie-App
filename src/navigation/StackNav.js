@@ -3,7 +3,7 @@ import React from 'react';
 import ModalScreen from '../screens/ModalScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import SearchScreen from '../screens/SearchScreen';
-import NomineeMylist from '../screens/NomineeMyList';
+import NomineeMylist from '../screens/MyList';
 
 const Stack = createStackNavigator();
 

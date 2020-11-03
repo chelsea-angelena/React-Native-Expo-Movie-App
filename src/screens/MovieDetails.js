@@ -77,13 +77,14 @@ export default function MovieDetails({
 							resizeMode='cover'
 							style={styles.image}
 						/>
-						<Card.Title>{Title}</Card.Title>
+						<Text style={styles.title}>{Title}</Text>
 						<Card.Divider />
 						<View style={styles.container}>
+							<Text style={styles.boldText}>Year: </Text>
 							<Text style={styles.h4}>{Year}</Text>
 							<Text style={styles.boldText}>Actors: </Text>
 							<Text style={styles.h4}>{Actors}</Text>
-							<Text style={styles.boldText}>Actors: </Text>
+							<Text style={styles.boldText}>Awards: </Text>
 							<Text style={styles.h4}>{Awards}</Text>
 							<Text style={styles.boldText}>Country: </Text>
 							<Text style={styles.h4}>Country</Text>
@@ -99,7 +100,7 @@ export default function MovieDetails({
 							<Text style={styles.h4}>{Runtime}</Text>
 							<Text style={styles.boldText}>Title: </Text>
 							<Text style={styles.h4}>{Title}</Text>
-							<Text style={styles.boldText}>Writer: </Text>
+							<Text style={styles.boldText}>Writers: </Text>
 							<Text style={styles.h4}>{Writer}</Text>
 							<Text style={styles.boldText}>Year: </Text>
 							<Text style={styles.h4}>{Year}</Text>
@@ -166,6 +167,8 @@ const styles = StyleSheet.create({
 	boldText: {
 		fontWeight: 'bold',
 		color: colors.white,
+		fontSize: 20,
+		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
 	},
 	buttonContainer: {
 		margin: 16,
@@ -177,12 +180,21 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		color: 'white',
-		padding: 2.5,
+		fontSize: 20,
+		lineHeight: 30,
+		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
 	},
 	innerView: {
 		maxWidth: 500,
 		minWidth: 320,
 		width: '100%',
 		alignSelf: 'center',
+	},
+	title: {
+		alignSelf: 'center',
+		fontSize: 40,
+		padding: 12,
+		color: colors.white,
+		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
 	},
 });

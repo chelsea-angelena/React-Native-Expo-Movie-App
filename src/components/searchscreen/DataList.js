@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-	Dimensions,
 	StyleSheet,
 	TouchableOpacity,
 	View,
@@ -10,8 +9,6 @@ import {
 import ListItem from './ListItem';
 import { useNavigation } from '@react-navigation/native';
 import Screen from '../../screens/Auth/Screen';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const DataList = ({ movies, loading, error }) => {
 	const navigation = useNavigation();
@@ -23,7 +20,6 @@ const DataList = ({ movies, loading, error }) => {
 		return <Text> Error...</Text>;
 	}
 
-	
 	return (
 		<Screen>
 			<View style={styles.listView}>

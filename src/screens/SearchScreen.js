@@ -13,8 +13,6 @@ import DataList from '../components/searchscreen/DataList';
 import colors from '../styles/colors';
 import api from '../api/api';
 import Screen from './Auth/Screen';
-
-// const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const SearchScreen = () => {

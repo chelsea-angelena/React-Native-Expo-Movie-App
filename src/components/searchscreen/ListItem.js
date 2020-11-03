@@ -41,7 +41,7 @@ const ListItem = ({ navigation, title, year, imageUri, id, item }) => {
 			style={styles.card}
 		>
 			<TouchableOpacity
-				onPress={() => navigation.navigate('Modal', { item, isSaved })}
+				onPress={() => navigation.navigate('Modal', { imdbId })}
 			>
 				<Card.Title style={styles.title}>{title}</Card.Title>
 				<Card.Title style={styles.subtitle}>{year}</Card.Title>

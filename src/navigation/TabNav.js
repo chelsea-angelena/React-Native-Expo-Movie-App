@@ -2,10 +2,11 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import StackNav from './StackNav';
-import MyList from '../screens/NomineeMyList';
+import MyList from '../screens/MyList';
 import { Feather } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import LogOut from './LogOut.js';
+import ListStack from './ListStack';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -33,9 +34,20 @@ export default function TabNav() {
 					),
 				}}
 			/>
-			<Tab.Screen
+			{/* <Tab.Screen
 				name='My List'
 				component={MyList}
+				options={{
+					tabBarLabel: 'My List',
+					headerShown: false,
+					tabBarIcon: ({ color }) => (
+						<MaterialCommunityIcons name='heart' color='white' size={26} />
+					),
+				}}
+			/> */}
+			<Tab.Screen
+				name='MyList'
+				component={ListStack}
 				options={{
 					tabBarLabel: 'My List',
 					headerShown: false,

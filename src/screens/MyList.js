@@ -14,7 +14,7 @@ import { Image, Card, Divider } from 'react-native-elements';
 import * as db from '../../config/firebaseConfig';
 import SavedItem from './SavedItem';
 import { Dimensions } from 'react-native';
-import Screen from '../screens/Auth/Screen';
+import Screen from './Auth/Screen';
 import colors from '../styles/colors';
 import useSaved from '../Context/useSaved';
 import { AuthContext } from '../Context/AuthContext';
@@ -90,6 +90,7 @@ export default function MyList({ route, navigation }) {
 								<>
 									<SavedItem
 										item={item}
+										imdbId={item.id}
 										userId={userId}
 										onDeleteItem={deleteItem}
 									/>

@@ -17,14 +17,18 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const innerWidth = 0.5 * windowWidth;
 
-const SavedItem = ({ item, userId, onDeleteItem }) => {
+const SavedItem = ({ item, imdbId, userId, onDeleteItem }) => {
 	const { id, Poster, Title } = item;
+	// let imdbId = id;
 	const navigation = useNavigation();
+	if (!imdbId) {
+		return <Text>Loading...</Text>;
+	}
 	return (
 		<View style={styles.view}>
 			<Card style={styles.card}>
 				<TouchableOpacity
-					onPress={() => navigation.navigate('Modal', { item })}
+					onPress={() => navigation.navigate('SavedModal', { imdbId })}
 				>
 					<Card.Title style={styles.title}>{Title}</Card.Title>
 					<Card.Divider />
@@ -44,7 +48,7 @@ const SavedItem = ({ item, userId, onDeleteItem }) => {
 					</TouchableOpacity>
 
 					<TouchableOpacity
-						onPress={() => navigation.navigate('Modal', { item })}
+						onPress={() => navigation.navigate('SavedModal', { imdbId })}
 						style={{ alignSelf: 'flex-end' }}
 					>
 						<MaterialCommunityIcons
