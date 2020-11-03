@@ -13,7 +13,9 @@ firebaseInit
 firebaseInit.js
 /firebaseInit.js
 ./firebaseInit.js
-
+googleConfigFile
+/googleConfigFile
+./googleConfigFile
 web-build/
 dotenv
 env.js
