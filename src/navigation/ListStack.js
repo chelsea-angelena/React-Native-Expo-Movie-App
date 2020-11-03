@@ -11,14 +11,14 @@ export default function ListStack() {
 		<Stack.Navigator
 			mode='modal'
 			headerMode='screen'
-			initialRouteName='MyListScreen'
+			initialRouteName='MyList'
 			screeenOptions={{
 				headerShown: false,
 			}}
 		>
 			<Stack.Screen
 				component={MyList}
-				name='MyListScreen'
+				name='MyList'
 				options={{ title: 'Saved Movies', headerShown: false }}
 			/>
 			<Stack.Screen

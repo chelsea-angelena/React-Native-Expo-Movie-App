@@ -1,14 +1,12 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Alert, Text, ActivityIndicator } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { AuthContext } from './src/Context/AuthContext';
 import { useAuth } from './src/screens/Auth/useAuth';
 import { ThemeProvider } from 'react-native-elements';
 import { useColorScheme } from 'react-native-appearance';
-import { useFonts } from 'expo-font';
 import MainNav from './src/navigation/MainNav';
-import SplashScreen from './SplashScreen';
-
+console.disableYellowBox = true;
 function App() {
 	const [user, loading] = useAuth();
 
