@@ -1,3 +1,4 @@
+import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -31,7 +32,6 @@ export const signInWithGoogle = async () => {
 	window.location.reload();
 };
 
-
 export const Goologin = async () => {
 	try {
 		//await GoogleSignIn.askForPlayServicesAsync();
@@ -47,7 +47,7 @@ export const Goologin = async () => {
 				result.accessToken
 			);
 			auth.signInWithCredential(credential).catch((error) => {
-				console.log(error);
+				console.error(e)
 			});
 		} else {
 			alert('login: Error:' + message);

@@ -36,7 +36,7 @@ export default function TabNav() {
 			/>
 
 			<Tab.Screen
-				name='MyList'
+				name='MyListStack'
 				component={ListStack}
 				options={{
 					tabBarLabel: 'My List',

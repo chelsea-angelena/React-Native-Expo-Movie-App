@@ -4,7 +4,6 @@ import { AuthContext } from '../Context/AuthContext';
 import MovieDetails from './MovieDetails';
 import api from '../api/api';
 import * as db from '../../config/firebaseConfig.js';
-import useSaved from '../Context/useSaved';
 import {
 	ImageBackground,
 	ScrollView,

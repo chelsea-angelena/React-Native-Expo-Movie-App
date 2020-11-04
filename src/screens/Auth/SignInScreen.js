@@ -11,7 +11,7 @@ import {
 	Text,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from './FormInput';
@@ -22,7 +22,7 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../Context/AuthContext';
 import colors from '../../styles/colors';
 import Screen from './Screen';
-
+import { AntDesign } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const innerWidth = 0.95 * windowWidth;
@@ -139,14 +139,23 @@ const SignInScreen = () => {
 							</View>
 						)}
 					</Formik>
-					<View>
-						<Button
-							style={{ backgroundColor: '#4285F4', marginTop: 20 }}
-							onPress={GoogleSignIn}
-							title='Login with Google'
-						/>
-					</View>
+
 					{error ? Alert.alert('Please try Sign In again, or, Sign Up') : null}
+					<Button
+						icon={
+							<Icon
+								name='google'
+								type='ant-design'
+								style={{ paddingRight: 32 }}
+								size={24}
+								color='white'
+							/>
+						}
+						iconLeft
+						title='Sign In With Google'
+						onPress={GoogleSignIn}
+						style={{ borderRadius: 40, margin: 24 }}
+					/>
 					<Button
 						title="Don't have an account? Sign Up"
 						onPress={goToSignup}
