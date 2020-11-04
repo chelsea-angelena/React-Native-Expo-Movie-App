@@ -40,7 +40,6 @@ const validationSchema = Yup.object().shape({
 	confirmPassword: Yup.string()
 		.oneOf([Yup.ref('password')], 'Confirm Password must matched Password')
 		.required('Confirm Password is required'),
-	check: Yup.boolean().oneOf([true], 'Please check the agreement'),
 });
 
 const SignUpScreen = () => {
@@ -172,16 +171,6 @@ const SignUpScreen = () => {
 											touched.confirmPassword && errors.confirmPassword
 										}
 									/>
-									<CheckBox
-										style={styles.checkBoxContainer}
-										checkedIcon='check-box'
-										iconType='material'
-										uncheckedIcon='check-box-outline-blank'
-										title='Agree to terms and conditions'
-										checkedTitle='You agreed to our terms and conditions'
-										checked={values.check}
-										onPress={() => setFieldValue('check', !values.check)}
-									/>
 									<View style={styles.buttonContainer}>
 										<FormButton
 											buttonType='outline'
@@ -231,7 +220,7 @@ const styles = StyleSheet.create({
 		width: innerWidth,
 		alignSelf: 'center',
 		backgroundColor: 'rgba(0,0,0,.7)',
-		paddingTop: 32,
+		// paddingTop: 32,
 		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
 		color: colors.white,
 	},

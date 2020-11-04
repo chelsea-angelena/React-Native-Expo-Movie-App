@@ -30,6 +30,11 @@ function StackNav() {
 				name='MyList'
 				component={NomineeMylist}
 			/>
+			<Stack.Screen
+				name='SavedModal'
+				component={ModalScreen}
+				options={{ headerShown: false }}
+			/>
 		</Stack.Navigator>
 	);
 }

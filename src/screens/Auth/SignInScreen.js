@@ -57,116 +57,119 @@ const SignInScreen = () => {
 		}
 	};
 	return (
-		<ImageBackground
-			alt='theatre'
-			style={{
-				resizeMode: 'cover',
-				height: windowHeight,
-				paddingBottom: 64,
-				paddingTop: 32,
-			}}
-			SameSite='Strict'
-			source={{
-				uri:
-					'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
-			}}
-		>
-			<Image
-				source={require('../../../assets/appTitle.png')}
-				alt='Logo'
+		<Screen>
+			<ImageBackground
+				alt='theatre'
 				style={{
-					alignSelf: 'center',
-					marginTop: 64,
+					resizeMode: 'cover',
+					height: windowHeight,
+					paddingBottom: 64,
+					paddingTop: 32,
 				}}
-			/>
-
-			<Screen>
+				SameSite='Strict'
+				source={{
+					uri:
+						'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+				}}
+			>
 				<KeyboardAwareScrollView>
-					<Formik
-						initialValues={{ email: '', password: '' }}
-						onSubmit={(values) => {
-							handleLogin(values);
+					<Image
+						source={require('../../../assets/appTitle.png')}
+						alt='Logo'
+						style={{
+							alignSelf: 'center',
+							marginTop: 64,
 						}}
-						validationSchema={validationSchema}
-					>
-						{({
-							handleChange,
-							values,
-							handleSubmit,
-							errors,
-							isValid,
-							touched,
-							handleBlur,
-						}) => (
-							<View style={styles.innerView}>
-								<FormInput
-									name='email'
-									value={values.email}
-									onChangeText={handleChange('email')}
-									placeholder='Enter email'
-									autoCapitalize='none'
-									iconName='ios-mail'
-									iconColor='#2C384A'
-									style={{ color: colors.white }}
-									onBlur={handleBlur('email')}
-								/>
-								<ErrorMessage errorValue={touched.email && errors.email} />
-								<FormInput
-									name='password'
-									style={{ color: colors.white }}
-									value={values.password}
-									onChangeText={handleChange('password')}
-									placeholder='Enter password'
-									secureTextEntry
-									iconName='ios-lock'
-									iconColor='#2C384A'
-									onBlur={handleBlur('password')}
-								/>
-								<ErrorMessage
-									errorValue={touched.password && errors.password}
-								/>
-
-								<FormButton
-									buttonType='outline'
-									onPress={handleSubmit}
-									title='LOGIN'
-									buttonColor={colors.white}
-									backgroundColor={colors.red}
-									disabled={!isValid}
-								/>
-
-								<ErrorMessage errorValue={errors.general} />
-							</View>
-						)}
-					</Formik>
-
-					{error ? Alert.alert('Please try Sign In again, or, Sign Up') : null}
-					<Button
-						icon={
-							<Icon
-								name='google'
-								type='ant-design'
-								style={{ paddingRight: 32 }}
-								size={24}
-								color='white'
-							/>
-						}
-						iconLeft
-						title='Sign In With Google'
-						onPress={GoogleSignIn}
-						style={{ borderRadius: 40, margin: 24 }}
 					/>
-					<Button
-						title="Don't have an account? Sign Up"
-						onPress={goToSignup}
-						titleStyle={{
-							color: colors.white,
-						}}
-						type='clear'
-					/>
+					<View style={styles.innerView}>
+						<Formik
+							initialValues={{ email: '', password: '' }}
+							onSubmit={(values) => {
+								handleLogin(values);
+							}}
+							validationSchema={validationSchema}
+						>
+							{({
+								handleChange,
+								values,
+								handleSubmit,
+								errors,
+								isValid,
+								touched,
+								handleBlur,
+							}) => (
+								<>
+									<FormInput
+										name='email'
+										value={values.email}
+										onChangeText={handleChange('email')}
+										placeholder='Enter email'
+										autoCapitalize='none'
+										iconName='ios-mail'
+										iconColor='#2C384A'
+										style={{ color: colors.white }}
+										onBlur={handleBlur('email')}
+									/>
+									<ErrorMessage errorValue={touched.email && errors.email} />
+									<FormInput
+										name='password'
+										style={{ color: colors.white }}
+										value={values.password}
+										onChangeText={handleChange('password')}
+										placeholder='Enter password'
+										secureTextEntry
+										iconName='ios-lock'
+										iconColor='#2C384A'
+										onBlur={handleBlur('password')}
+									/>
+									<ErrorMessage
+										errorValue={touched.password && errors.password}
+									/>
+
+									<FormButton
+										buttonType='outline'
+										onPress={handleSubmit}
+										title='LOGIN'
+										buttonColor={colors.white}
+										backgroundColor={colors.red}
+										disabled={!isValid}
+									/>
+
+									<ErrorMessage errorValue={errors.general} />
+								</>
+							)}
+						</Formik>
+
+						{error
+							? Alert.alert('Please try Sign In again, or, Sign Up')
+							: null}
+						<Button
+							icon={
+								<Icon
+									name='google'
+									type='ant-design'
+									style={{ paddingRight: 32 }}
+									size={24}
+									color='white'
+								/>
+							}
+							iconLeft
+							title='Sign In With Google'
+							onPress={GoogleSignIn}
+							style={{ borderRadius: 40, margin: 24 }}
+						/>
+						<Button
+							title="Don't have an account? Sign Up"
+							onPress={goToSignup}
+							titleStyle={{
+								color: colors.white,
+							}}
+							type='clear'
+						/>
+					</View>
 				</KeyboardAwareScrollView>
-			</Screen>
-		</ImageBackground>
+			</ImageBackground>
+		</Screen>
 	);
 };
 
@@ -177,8 +180,8 @@ const styles = StyleSheet.create({
 	innerView: {
 		width: innerWidth,
 		alignSelf: 'center',
-		backgroundColor: 'rgba(0,0,0,.7)',
-		paddingTop: 32,
+		// backgroundColor: 'rgba(0,0,0,.7)',
+		// paddingTop: 32,
 		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
 		color: colors.white,
 	},
