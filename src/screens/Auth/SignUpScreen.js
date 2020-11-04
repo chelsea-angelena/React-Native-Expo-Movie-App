@@ -16,7 +16,7 @@ import FormInput from './FormInput';
 import FormButton from './FormButton';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { CheckBox, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 
 import ErrorMessage from './ErrorMessage';
 import Screen from './Screen';

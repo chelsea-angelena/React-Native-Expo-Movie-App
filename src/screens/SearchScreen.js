@@ -15,6 +15,7 @@ import colors from '../styles/colors';
 import api from '../api/api';
 import Screen from './Auth/Screen';
 const windowHeight = Dimensions.get('window').height;
+import * as SplashScreen from 'expo-splash-screen';
 
 const SearchScreen = () => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -40,12 +41,15 @@ const SearchScreen = () => {
 
 	useEffect(() => {
 		submitSearch('');
+		SplashScreen.preventAutoHideAsync();
 	}, []);
 
 	if (loading) {
 		return <ActivityIndicator size='large' color='white' />;
 	}
-
+	if (!loading) {
+		SplashScreen.hideAsync();
+	}
 	return (
 		<Screen>
 			<ImageBackground

@@ -22,7 +22,7 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../Context/AuthContext';
 import colors from '../../styles/colors';
 import Screen from './Screen';
-import { AntDesign } from '@expo/vector-icons';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const innerWidth = 0.95 * windowWidth;
@@ -45,8 +45,26 @@ const SignInScreen = () => {
 	const goToSignup = () => navigation.navigate('SignUpScreen');
 
 	const GoogleSignIn = async () => {
-		await db.Goologin();
+		try {
+			await db.Goologin();
+		} catch (e) {
+			setError('error');
+		}
 	};
+
+	// const GoogleSignIn = async () => {
+	// 	try {
+	// 		const { type, token, user, error } = await db.googleLogin();
+
+	// 		if (type === 'success') {
+	// 			// DISPATCH TOKEN AND USER DATA
+	// 			// TO IMPLEMENT NAVIGATION AND USER INFO DISPLAYS
+	// 			dispatch({ type: 'GOOGLE_LOGIN', token: accessToken, user });
+	// 		}
+	// 	} catch (e) {
+	// 		console.log('error', e);
+	// 	}
+	// };
 
 	const handleLogin = async (values) => {
 		const { email, password } = values;
