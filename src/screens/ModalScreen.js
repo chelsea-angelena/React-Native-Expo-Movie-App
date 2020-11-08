@@ -53,7 +53,19 @@ export default function ModalScreen(props, { route, params }) {
 	}, []);
 
 	if (!movieId) {
-		return <ActivityIndicator size='large' color='white' />;
+		return (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					flexDirection: 'row',
+					justifyContent: 'space-around',
+					padding: 10,
+				}}
+			>
+				<ActivityIndicator color='black' size='large' />
+			</View>
+		);
 	}
 
 	return (

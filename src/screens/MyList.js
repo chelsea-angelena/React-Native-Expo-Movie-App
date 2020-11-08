@@ -50,11 +50,20 @@ export default function MyList({ route, navigation }) {
 		getSaved();
 	}, []);
 
-	if (!userId) {
-		return <ActivityIndicator />;
-	}
-	if (!savedList) {
-		return <ActivityIndicator />;
+	if (!savedList || !userId) {
+		return (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					flexDirection: 'row',
+					justifyContent: 'space-around',
+					padding: 10,
+				}}
+			>
+				<ActivityIndicator color='black' size='large' />
+			</View>
+		);
 	}
 	return (
 		<Screen>

@@ -41,14 +41,22 @@ const SearchScreen = () => {
 
 	useEffect(() => {
 		submitSearch('');
-		SplashScreen.preventAutoHideAsync();
 	}, []);
 
 	if (loading) {
-		return <ActivityIndicator size='large' color='white' />;
-	}
-	if (!loading) {
-		SplashScreen.hideAsync();
+		return (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					flexDirection: 'row',
+					justifyContent: 'space-around',
+					padding: 10,
+				}}
+			>
+				<ActivityIndicator color='black' size='large' />
+			</View>
+		);
 	}
 	return (
 		<Screen>

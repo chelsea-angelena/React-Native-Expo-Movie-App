@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { AuthContext } from './src/Context/AuthContext';
 import { useAuth } from './src/screens/Auth/useAuth';
 import { ThemeProvider } from 'react-native-elements';
@@ -12,15 +12,24 @@ function App() {
 
 	let colorScheme = useColorScheme();
 
-	useEffect(() => {
-		SplashScreen.preventAutoHideAsync();
-	}, []);
-
-
-	if (!loading){
-		SplashScreen.hideAsync();
+	if (loading) {
+		return (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					flexDirection: 'row',
+					justifyContent: 'space-around',
+					padding: 10,
+				}}
+			>
+				<View style={{ flexDirection: 'column', alignSelf: 'center' }}>
+					<ActivityIndicator color='black' size='large' />
+					<Text>Loading up our Database...</Text>
+				</View>
+			</View>
+		);
 	}
-
 	return (
 		<>
 			<AuthContext.Provider value={user}>

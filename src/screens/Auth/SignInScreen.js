@@ -11,7 +11,7 @@ import {
 	Text,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Button, Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from './FormInput';
