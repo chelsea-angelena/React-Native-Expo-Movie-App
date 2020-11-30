@@ -46,25 +46,12 @@ const SignInScreen = () => {
 
 	const GoogleSignIn = async () => {
 		try {
-			await db.Goologin();
+			let res = await db.Goologin();
+			console.log(res);
 		} catch (e) {
-			setError('error');
+			setError(e);
 		}
 	};
-
-	// const GoogleSignIn = async () => {
-	// 	try {
-	// 		const { type, token, user, error } = await db.googleLogin();
-
-	// 		if (type === 'success') {
-	// 			// DISPATCH TOKEN AND USER DATA
-	// 			// TO IMPLEMENT NAVIGATION AND USER INFO DISPLAYS
-	// 			dispatch({ type: 'GOOGLE_LOGIN', token: accessToken, user });
-	// 		}
-	// 	} catch (e) {
-	// 		console.log('error', e);
-	// 	}
-	// };
 
 	const handleLogin = async (values) => {
 		const { email, password } = values;
@@ -123,6 +110,7 @@ const SignInScreen = () => {
 										onChangeText={handleChange('email')}
 										placeholder='Enter email'
 										autoCapitalize='none'
+										autocorrect={false}
 										iconName='ios-mail'
 										iconColor='#2C384A'
 										style={{ color: colors.white }}

@@ -15,10 +15,20 @@ const DataList = ({ movies, loading, error }) => {
 	const navigation = useNavigation();
 
 	if (loading) {
-		return <ActivityIndicator size='large' color='white' />;
-	}
-	if (error) {
-		return <Text> Error...</Text>;
+		return (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					flexDirection: 'row',
+					justifyContent: 'space-around',
+					padding: 10,
+					backgroundColor: 'black',
+				}}
+			>
+				<ActivityIndicator color='white' size='large' />
+			</View>
+		);
 	}
 
 	return (

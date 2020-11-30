@@ -59,9 +59,10 @@ export default function MyList({ route, navigation }) {
 					flexDirection: 'row',
 					justifyContent: 'space-around',
 					padding: 10,
+					backgroundColor: 'black',
 				}}
 			>
-				<ActivityIndicator color='black' size='large' />
+				<ActivityIndicator color='white' size='large' />
 			</View>
 		);
 	}

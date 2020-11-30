@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
 		width: innerWidth,
 		alignSelf: 'center',
 		backgroundColor: 'rgba(0,0,0,.7)',
-		// paddingTop: 32,
+
 		fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
 		color: colors.white,
 	},

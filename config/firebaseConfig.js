@@ -1,4 +1,3 @@
-import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -6,19 +5,19 @@ import 'firebase/storage';
 import Constants from 'expo-constants';
 import firebaseConfigDEV from '../firebaseInit';
 import * as Google from 'expo-google-app-auth';
-
+import * as AppAuth from 'expo-app-auth';
 let Firebase = firebase.initializeApp(firebaseConfigDEV);
-
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
 
 export const Goologin = async () => {
 	try {
-		//await GoogleSignIn.askForPlayServicesAsync();
 		const result = await Google.logInAsync({
-			iosClientId: Constants.manifest.extra.iosClientId,
 			androidClientId: Constants.manifest.extra.androidClientId,
+			iosClientId: Constants.manifest.extra.iosClientId,
+			scopes: ['profile', 'email'],
+			redirectUri: `${AppAuth.OAuthRedirect}:/oauth2redirect/google`,
 		});
 		if (result.type === 'success') {
 			const credential = firebase.auth.GoogleAuthProvider.credential(

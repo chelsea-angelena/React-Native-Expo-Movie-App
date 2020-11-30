@@ -52,7 +52,18 @@ export default function SavedModal(props, { route, params }) {
 	}, []);
 
 	if (!movieId) {
-		return <ActivityIndicator size='large' color='white' />;
+		<View
+			style={{
+				flex: 1,
+				justifyContent: 'center',
+				flexDirection: 'row',
+				justifyContent: 'space-around',
+				padding: 10,
+				backgroundColor: 'black',
+			}}
+		>
+			<ActivityIndicator color='white' size='large' />
+		</View>;
 	}
 
 	return (
