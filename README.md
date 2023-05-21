@@ -55,7 +55,7 @@
   brew install node
   ```
 - xcode (App store)
-- expo cli
+- [expo cli](https://github.com/expo/expo-cli)
 - Firebase/firestore account (free)
 
 
